@@ -1,1 +1,13 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-dark: #171717;
+  --color-graphite: #333633;
+  --color-subtle-graphite: #979797;
+
+  --font-rainyhearts: var(--font-rainyhearts);
+}
+
+body {
+  @apply min-h-dvh w-dvw;
+}
