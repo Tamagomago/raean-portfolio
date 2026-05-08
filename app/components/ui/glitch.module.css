@@ -1,7 +1,17 @@
 /* ─── Root ─────────────────────────────────────────────────────────────────── */
 
+.root {
+  background-image: linear-gradient(#ffffff, #ffffff);
+  background-size: 100% 0%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  transition:
+    background-size 0.2s ease-out,
+    border-color 0.2s ease-out;
+}
+
 .rootHovered {
-  background: #ffffff;
+  background-size: 100% 100%;
   border-color: #000000;
 }
 
@@ -93,7 +103,6 @@
 
 .charDistort {
   animation: hDistort 0.13s steps(1) forwards !important;
-  color: #ffffff !important;
 }
 
 @keyframes hDistort {

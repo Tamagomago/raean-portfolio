@@ -125,8 +125,9 @@ const Title = ({ text = 'WATCH_DOGS', distortIntervalMs = 750, forceVisible }: T
       ref={containerRef}
       className={cn(
         'relative inline-block cursor-default overflow-hidden select-none',
-        'px-1 py-2 transition-colors duration-300',
-        hovered ? styles.rootHovered : styles.root,
+        'px-1 py-2',
+        styles.root,
+        hovered && styles.rootHovered,
       )}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
