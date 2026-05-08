@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import PixelBlast from '@/app/components/ui/pixel-blast';
+import React, { useEffect, useRef, useState, useLayoutEffect } from 'react';
 import Title from '@/app/components/ui/title';
 import localFont from 'next/font/local';
 import Subtitle from '@/app/components/ui/text';
 import { cn } from '@/app/lib/utils';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const rainyhearts = localFont({
   src: '../../../public/fonts/rainyhearts.ttf',
@@ -14,6 +15,7 @@ const rainyhearts = localFont({
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,42 +25,71 @@ const Hero = () => {
           observer.disconnect();
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.01 },
     );
+
+    // Fallback for mobile
+    const fallbackTimeout = setTimeout(() => {
+      setIsVisible(true);
+      observer.disconnect();
+    }, 1000);
 
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallbackTimeout);
+    };
   }, []);
+
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+
+      // Text moves up first and more noticeably
+      tl.to(
+        contentRef.current,
+        {
+          y: -200,
+          opacity: 0,
+          ease: 'power2.out',
+        },
+        0,
+      );
+
+      // Background parallax targets the global background
+      tl.to(
+        '#global-background',
+        {
+          yPercent: 15,
+          ease: 'none',
+        },
+        0.2,
+      );
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <div
+      ref={containerRef}
       className={
         'relative flex h-screen w-full max-w-full shrink-0 flex-col items-center justify-center overflow-hidden'
       }
     >
-      <PixelBlast
-        variant="diamond"
-        pixelSize={3}
-        color="#575757"
-        patternScale={2.25}
-        patternDensity={1.2}
-        pixelSizeJitter={1.15}
-        enableRipples
-        rippleSpeed={0.01}
-        rippleThickness={0.1}
-        rippleIntensityScale={0.2}
-        liquid={false}
-        liquidStrength={0.12}
-        liquidRadius={1.2}
-        liquidWobbleSpeed={5}
-        speed={3}
-        edgeFade={0}
-        transparent
-        className={'absolute inset-0 h-full w-full'}
-      />
-      <div ref={containerRef}>
+      <div ref={contentRef} className="relative z-10">
         <Title
           text={'RAEAN'}
           distortIntervalMs={2000}
@@ -71,7 +102,7 @@ const Hero = () => {
       </div>
 
       {/* Fade-to-background overlay */}
-      <div className="to-dark pointer-events-none absolute bottom-0 left-0 h-48 w-full bg-linear-to-b from-transparent" />
+      <div className="to-dark pointer-events-none absolute bottom-0 left-0 z-20 h-48 w-full bg-linear-to-b from-transparent" />
     </div>
   );
 };

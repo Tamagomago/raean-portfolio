@@ -30,7 +30,7 @@ const Text = ({ children, className, forceVisible, duration = 600, stagger = 40 
           observer.disconnect();
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.01 },
     );
 
     if (containerRef.current) {

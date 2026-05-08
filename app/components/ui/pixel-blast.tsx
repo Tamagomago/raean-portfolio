@@ -407,6 +407,7 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
       uEdgeFade: { value: number };
     };
     resizeObserver?: ResizeObserver;
+    visibilityObserver?: IntersectionObserver;
     raf?: number;
     quad?: THREE.Mesh<THREE.PlaneGeometry, THREE.ShaderMaterial>;
     timeOffset?: number;
@@ -449,7 +450,8 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
         canvas,
         antialias,
         alpha: true,
-        powerPreference: 'high-performance',
+        powerPreference: 'default',
+        precision: 'mediump', // Better for mobile GPUs
       });
       renderer.domElement.style.width = '100%';
       renderer.domElement.style.height = '100%';
@@ -457,6 +459,14 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
       container.appendChild(renderer.domElement);
       if (transparent) renderer.setClearAlpha(0);
       else renderer.setClearColor(0x000000, 1);
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          visibilityRef.current.visible = entry.isIntersecting;
+        },
+        { threshold: 0 },
+      );
+      observer.observe(container);
       const uniforms = {
         uResolution: { value: new THREE.Vector2(0, 0) },
         uTime: { value: 0 },
@@ -625,6 +635,7 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
         clickIx: 0,
         uniforms,
         resizeObserver: ro,
+        visibilityObserver: observer,
         raf,
         quad,
         timeOffset,
@@ -662,6 +673,7 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
       if (!threeRef.current) return;
       const t = threeRef.current;
       t.resizeObserver?.disconnect();
+      t.visibilityObserver?.disconnect();
       cancelAnimationFrame(t.raf!);
       t.quad?.geometry.dispose();
       t.material.dispose();
