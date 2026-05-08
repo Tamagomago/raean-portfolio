@@ -5,6 +5,7 @@ import PixelBlast from '@/app/components/ui/pixel-blast';
 import Title from '@/app/components/ui/title';
 import localFont from 'next/font/local';
 import Subtitle from '@/app/components/ui/text';
+import { cn } from '@/app/lib/utils';
 
 const rainyhearts = localFont({
   src: '../../../public/fonts/rainyhearts.ttf',
@@ -32,7 +33,11 @@ const Hero = () => {
     return () => observer.disconnect();
   }, []);
   return (
-    <>
+    <div
+      className={
+        'relative flex h-screen w-full max-w-full shrink-0 flex-col items-center justify-center overflow-hidden'
+      }
+    >
       <PixelBlast
         variant="diamond"
         pixelSize={3}
@@ -54,12 +59,20 @@ const Hero = () => {
         className={'absolute inset-0 h-full w-full'}
       />
       <div ref={containerRef}>
-        <Title text={'RAEAN'} distortIntervalMs={2000} forceVisible={isVisible} />
-        <Subtitle className={rainyhearts.className} forceVisible={isVisible}>
-          {'//    FULLSTACK DEVELOPER'}
+        <Title
+          text={'RAEAN'}
+          distortIntervalMs={2000}
+          forceVisible={isVisible}
+          className={'sm:text-[12vw] md:text-[200px] md:font-black lg:text-[300px]'}
+        />
+        <Subtitle className={cn(rainyhearts.className, 'px-8')} forceVisible={isVisible}>
+          {'//    FULLSTACK_DEVELOPER'}
         </Subtitle>
       </div>
-    </>
+
+      {/* Fade-to-background overlay */}
+      <div className="to-dark pointer-events-none absolute bottom-0 left-0 h-48 w-full bg-linear-to-b from-transparent" />
+    </div>
   );
 };
 

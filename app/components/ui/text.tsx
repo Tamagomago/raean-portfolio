@@ -3,20 +3,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/app/lib/utils';
 import { useGlitch } from '../../hooks/useGlitch';
-import styles from '@/app/components/ui/glitch.module.css';
+import styles from '@/app/components/ui/typography.module.css';
 
 interface TextProps {
   children: string;
   className?: string;
   forceVisible?: boolean;
+  duration?: number;
+  stagger?: number;
 }
 
-const Text = ({ children, className, forceVisible }: TextProps) => {
+const Text = ({ children, className, forceVisible, duration = 600, stagger = 40 }: TextProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const activeVisible = forceVisible ?? isVisible;
-  const { glitchChars } = useGlitch(children, activeVisible, 600, 40, 60);
+  const { glitchChars } = useGlitch(children, activeVisible, duration, stagger, 60);
 
   useEffect(() => {
     if (forceVisible !== undefined) return;
@@ -39,7 +41,7 @@ const Text = ({ children, className, forceVisible }: TextProps) => {
   }, [forceVisible]);
 
   return (
-    <div ref={containerRef} className={cn('px-8 text-2xl', className)}>
+    <div ref={containerRef} className={cn('px-0 text-2xl', className)}>
       <p className="font-rainyhearts flex flex-nowrap items-baseline leading-none">
         {children.split('').map((char, i) => {
           const displayChar = glitchChars[i] ?? char;

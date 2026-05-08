@@ -10,7 +10,7 @@ import {
 } from 'geist/font/pixel';
 import { cn } from '@/app/lib/utils';
 import { useGlitch } from '../../hooks/useGlitch';
-import styles from '@/app/components/ui/glitch.module.css';
+import styles from '@/app/components/ui/typography.module.css';
 
 type StyleVariant = 'filled' | 'outline' | 'invert' | 'grid' | 'triangle';
 
@@ -23,6 +23,7 @@ interface TitleProps {
   text?: string;
   distortIntervalMs?: number;
   forceVisible?: boolean;
+  className?: string;
 }
 
 const FONTS = [
@@ -47,7 +48,12 @@ function buildInitialMeta(text: string): CharMeta[] {
   }));
 }
 
-const Title = ({ text = 'WATCH_DOGS', distortIntervalMs = 750, forceVisible }: TitleProps) => {
+const Title = ({
+  text = 'WATCH_DOGS',
+  distortIntervalMs = 750,
+  forceVisible,
+  className,
+}: TitleProps) => {
   const [meta, setMeta] = useState<CharMeta[]>(() => buildInitialMeta(text));
   const [distorted, setDistorted] = useState<Set<number>>(new Set());
   const [hovered, setHovered] = useState(false);
@@ -124,7 +130,7 @@ const Title = ({ text = 'WATCH_DOGS', distortIntervalMs = 750, forceVisible }: T
     <div
       ref={containerRef}
       className={cn(
-        'relative inline-block cursor-default overflow-hidden select-none',
+        'relative inline-block max-w-full cursor-default overflow-hidden select-none',
         'px-1 py-2',
         styles.root,
         hovered && styles.rootHovered,
@@ -144,8 +150,9 @@ const Title = ({ text = 'WATCH_DOGS', distortIntervalMs = 750, forceVisible }: T
               key={i}
               data-c={char}
               className={cn(
-                'relative inline-block text-[15vw] leading-none font-extralight sm:text-[12vw] md:text-[200px] md:font-black lg:text-[300px]',
+                'relative inline-block text-[15vw] leading-none font-extralight',
                 'transition-[color,background,text-decoration] duration-150',
+                className,
                 font,
                 styles[`s_${style}`],
                 (isDistorted || isGlitching) && styles.charDistort,
