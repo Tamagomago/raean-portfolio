@@ -1,9 +1,7 @@
 'use client';
 
 import React from 'react';
-import Title from '@/app/components/ui/title';
-import Text from '@/app/components/ui/text';
-import SquareCell from '@/app/components/ui/square-cell';
+import { Title, Text, SquareCell } from '@/app/components/ui';
 import { tools } from '@/app/lib/data';
 
 const Tools = () => {
@@ -18,10 +16,11 @@ const Tools = () => {
       <div className={'my-50 flex max-w-4xl flex-col items-center justify-center text-center'}>
         <div className="mb-8">
           <Title
-            text={'TOOLS'}
             distortIntervalMs={2000}
             className={'text-[150px] md:text-[200px]'}
-          />
+          >
+            TOOLS
+          </Title>
         </div>
         <div className="mb-16">
           {description.split('\n').map((sentence, i) => (
@@ -41,7 +40,9 @@ const Tools = () => {
         {/* 3-row grid of cells */}
         <div className="grid grid-cols-3 gap-3">
           {tools.map((tool, i) => (
-            <SquareCell key={i} name={tool.name} logo={`/svg/${tool.logo}`} />
+            <SquareCell key={i} logo={`/svg/${tool.logo}`}>
+              {tool.name}
+            </SquareCell>
           ))}
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { usePathname } from 'next/navigation';
-import NavLink from '@/app/components/ui/nav-link';
+import { NavLink } from '@/app/components/ui';
 
 const Navbar = () => {
   const navItems = ['home', 'about_raean', 'works', 'experience', 'contact'];

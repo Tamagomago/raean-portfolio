@@ -20,7 +20,7 @@ interface CharMeta {
 }
 
 interface TitleProps {
-  text?: string;
+  children: string;
   distortIntervalMs?: number;
   forceVisible?: boolean;
   className?: string;
@@ -36,32 +36,34 @@ const FONTS = [
 
 const ALL_STYLES: StyleVariant[] = ['filled', 'outline', 'invert', 'grid', 'triangle'];
 
-function randomStyle(exclude?: StyleVariant): StyleVariant {
+const getRandomStyle = (exclude?: StyleVariant): StyleVariant => {
   const pool = ALL_STYLES.filter((s) => s !== exclude);
   return pool[Math.floor(Math.random() * pool.length)];
-}
+};
 
-function buildInitialMeta(text: string): CharMeta[] {
+const getRandomFont = () => FONTS[Math.floor(Math.random() * FONTS.length)];
+
+const buildInitialMeta = (text: string): CharMeta[] => {
   return text.split('').map((_, i) => ({
     font: FONTS[i % FONTS.length],
     style: 'filled' as StyleVariant,
   }));
-}
+};
 
 const Title = ({
-  text = 'WATCH_DOGS',
+  children,
   distortIntervalMs = 750,
   forceVisible,
   className,
 }: TitleProps) => {
-  const [meta, setMeta] = useState<CharMeta[]>(() => buildInitialMeta(text));
+  const [meta, setMeta] = useState<CharMeta[]>(() => buildInitialMeta(children));
   const [distorted, setDistorted] = useState<Set<number>>(new Set());
   const [hovered, setHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const activeVisible = forceVisible ?? isVisible;
-  const { glitchChars } = useGlitch(text, activeVisible);
+  const { glitchChars } = useGlitch(children, activeVisible);
 
   const metaRef = useRef(meta);
   useEffect(() => {
@@ -89,11 +91,11 @@ const Title = ({
   }, [forceVisible]);
 
   const triggerDistort = useCallback(() => {
-    const idx = Math.floor(Math.random() * text.length);
+    const idx = Math.floor(Math.random() * children.length);
 
     const currentStyle = metaRef.current[idx]?.style;
-    const newStyle = randomStyle(currentStyle);
-    const newFont = FONTS[Math.floor(Math.random() * FONTS.length)];
+    const newStyle = getRandomStyle(currentStyle);
+    const newFont = getRandomFont();
 
     setDistorted((prev) => {
       if (prev.has(idx)) return prev;
@@ -113,7 +115,7 @@ const Title = ({
         return next;
       });
     }, 140);
-  }, [text.length]);
+  }, [children.length]);
 
   useEffect(() => {
     if (!activeVisible) return;
@@ -139,7 +141,7 @@ const Title = ({
       onMouseLeave={() => setHovered(false)}
     >
       <h1 className="flex flex-nowrap items-baseline leading-none">
-        {text.split('').map((char, i) => {
+        {children.split('').map((char, i) => {
           const { font, style } = meta[i] ?? { font: FONTS[0], style: 'filled' };
           const isDistorted = distorted.has(i);
           const displayChar = glitchChars[i] ?? char;

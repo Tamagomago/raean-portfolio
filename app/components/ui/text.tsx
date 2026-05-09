@@ -58,14 +58,7 @@ const Text = ({
 
   return (
     <div ref={containerRef} className={cn('px-0 text-2xl', className)}>
-      <p
-        className={cn(
-          font,
-          'flex flex-wrap items-baseline leading-normal',
-          alignmentClasses[align],
-        )}
-      >
-
+      <p className={cn('flex flex-wrap items-baseline leading-normal', alignmentClasses[align])}>
         {children.split('').map((char, i) => {
           const displayChar = glitchChars[i] ?? char;
           const isGlitching = glitchChars[i] !== null;

@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useEffect, useRef, useState, useLayoutEffect } from 'react';
-import Title from '@/app/components/ui/title';
+import { Title, Text } from '@/app/components/ui';
 import localFont from 'next/font/local';
-import Subtitle from '@/app/components/ui/text';
 import { cn } from '@/app/lib/utils';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -91,14 +90,15 @@ const Hero = () => {
     >
       <div ref={contentRef} className="relative z-10">
         <Title
-          text={'RAEAN'}
           distortIntervalMs={2000}
           forceVisible={isVisible}
           className={'sm:text-[12vw] md:text-[200px] md:font-black lg:text-[300px]'}
-        />
-        <Subtitle className={cn(rainyhearts.className, 'px-8')} forceVisible={isVisible}>
+        >
+          RAEAN
+        </Title>
+        <Text className={cn(rainyhearts.className, 'px-8')} forceVisible={isVisible}>
           {'//    FULLSTACK_DEVELOPER'}
-        </Subtitle>
+        </Text>
       </div>
 
       {/* Fade-to-background overlay */}

@@ -7,11 +7,11 @@ import Text from '@/app/components/ui/text';
 
 interface SquareCellProps {
   logo: string;
-  name: string;
+  children: string;
   className?: string;
 }
 
-const SquareCell = ({ logo, name, className }: SquareCellProps) => {
+const SquareCell = ({ logo, children, className }: SquareCellProps) => {
   const [glitchKey, setGlitchKey] = useState(0);
 
   const handleMouseEnter = () => {
@@ -33,15 +33,15 @@ const SquareCell = ({ logo, name, className }: SquareCellProps) => {
         }
       />
       <div className="relative h-12 w-12 transition-all duration-300 md:h-16 md:w-16">
-        <Image src={logo} alt={name} fill className="object-contain group-hover:invert" />
+        <Image src={logo} alt={children} fill className="object-contain group-hover:invert" />
       </div>
       <div
         className={
           'absolute right-0 bottom-0 hidden bg-black px-2 text-white lowercase group-hover:block'
         }
       >
-        <Text key={glitchKey} className={'text-lg'} forceVisible={true}>
-          {name}
+        <Text key={glitchKey} className={'font-rainyhearts text-lg'} forceVisible={true}>
+          {children}
         </Text>
       </div>
     </div>

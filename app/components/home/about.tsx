@@ -4,9 +4,7 @@ import React, { useState } from 'react';
 import { cn } from '@/app/lib/utils';
 import { GeistPixelSquare } from 'geist/font/pixel';
 import styles from '@/app/components/ui/typography.module.css';
-import Title from '@/app/components/ui/title';
-import Text from '@/app/components/ui/text';
-import NavLink from '@/app/components/ui/nav-link';
+import { Title, Text, NavLink } from '@/app/components/ui';
 import Link from 'next/link';
 
 const About = () => {
@@ -23,7 +21,9 @@ const About = () => {
           ABOUT
         </h1>
         <div className={'mb-8 ml-8'}>
-          <Title text={'RAEAN'} distortIntervalMs={2000} className={'text-[200px]'} />
+          <Title distortIntervalMs={2000} className={'text-[200px]'}>
+            RAEAN
+          </Title>
         </div>
         <div className={'mb-30'}>
           {description.split('\n').map((sentence, i) => (

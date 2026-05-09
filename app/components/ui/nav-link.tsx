@@ -13,13 +13,7 @@ interface NavLinkProps {
   onMouseEnter?: () => void;
 }
 
-const NavLink = ({
-  href,
-  children,
-  showActiveBg,
-  className,
-  onMouseEnter,
-}: NavLinkProps) => {
+const NavLink = ({ href, children, showActiveBg, className, onMouseEnter }: NavLinkProps) => {
   const [glitchKey, setGlitchKey] = useState(0);
 
   const handleMouseEnter = () => {
@@ -49,6 +43,7 @@ const NavLink = ({
         className={cn(
           'relative z-10 px-0! text-lg transition-colors duration-300',
           showActiveBg ? 'text-black' : 'group-hover:text-black',
+          'font-rainyhearts',
         )}
         forceVisible={true}
       >
