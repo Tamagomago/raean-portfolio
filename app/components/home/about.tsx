@@ -27,7 +27,13 @@ const About = () => {
         </div>
         <div className={'mb-30'}>
           {description.split('\n').map((sentence, i) => (
-            <Text key={i} stagger={15} duration={300} className={'mb-3 max-w-3xl text-xl'}>
+            <Text
+              key={i}
+              stagger={15}
+              font={'font-geist-mono'}
+              duration={300}
+              className={'text-sm'}
+            >
               {sentence}
             </Text>
           ))}

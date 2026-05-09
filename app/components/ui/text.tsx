@@ -8,12 +8,22 @@ import styles from '@/app/components/ui/typography.module.css';
 interface TextProps {
   children: string;
   className?: string;
+  font?: string;
+  align?: 'start' | 'center' | 'end';
   forceVisible?: boolean;
   duration?: number;
   stagger?: number;
 }
 
-const Text = ({ children, className, forceVisible, duration = 600, stagger = 40 }: TextProps) => {
+const Text = ({
+  children,
+  className,
+  font = 'font-rainyhearts',
+  align = 'start',
+  forceVisible,
+  duration = 600,
+  stagger = 40,
+}: TextProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -40,9 +50,22 @@ const Text = ({ children, className, forceVisible, duration = 600, stagger = 40 
     return () => observer.disconnect();
   }, [forceVisible]);
 
+  const alignmentClasses = {
+    start: 'justify-start',
+    center: 'justify-center',
+    end: 'justify-end',
+  };
+
   return (
     <div ref={containerRef} className={cn('px-0 text-2xl', className)}>
-      <p className="font-rainyhearts flex flex-nowrap items-baseline leading-none">
+      <p
+        className={cn(
+          font,
+          'flex flex-wrap items-baseline leading-normal',
+          alignmentClasses[align],
+        )}
+      >
+
         {children.split('').map((char, i) => {
           const displayChar = glitchChars[i] ?? char;
           const isGlitching = glitchChars[i] !== null;

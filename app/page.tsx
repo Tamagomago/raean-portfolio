@@ -1,7 +1,7 @@
 import React from 'react';
 import Hero from '@/app/components/home/hero';
 import About from '@/app/components/home/about';
-import Skills from '@/app/components/home/skills';
+import Tools from './components/home/tools';
 import PixelBlast from '@/app/components/ui/pixel-blast';
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
           pixelSize={3}
           color="#575757"
           patternScale={2.5}
-          patternDensity={1}
+          patternDensity={1.3}
           pixelSizeJitter={1.15}
           enableRipples={false}
           rippleSpeed={0.01}
@@ -24,6 +24,7 @@ export default function Home() {
           liquidRadius={1.2}
           liquidWobbleSpeed={5}
           speed={3}
+          autoPauseOffscreen={false}
           edgeFade={0}
           transparent
           className={'h-full w-full'}
@@ -32,7 +33,7 @@ export default function Home() {
       <div className="relative z-10 flex w-full flex-col items-center justify-start">
         <Hero />
         <About />
-        <Skills />
+        <Tools />
       </div>
     </main>
   );

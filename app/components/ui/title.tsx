@@ -138,7 +138,7 @@ const Title = ({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <div className="flex flex-nowrap items-baseline leading-none">
+      <h1 className="flex flex-nowrap items-baseline leading-none">
         {text.split('').map((char, i) => {
           const { font, style } = meta[i] ?? { font: FONTS[0], style: 'filled' };
           const isDistorted = distorted.has(i);
@@ -163,7 +163,7 @@ const Title = ({
             </span>
           );
         })}
-      </div>
+      </h1>
     </div>
   );
 };
