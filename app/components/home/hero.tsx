@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useEffect, useRef, useState, useLayoutEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Title, Text } from '@/app/components/ui';
 import localFont from 'next/font/local';
 import { cn } from '@/app/lib/utils';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useParallax } from '@/app/hooks/useParallax';
 
 const rainyhearts = localFont({
   src: '../../../public/fonts/rainyhearts.ttf',
@@ -43,43 +42,7 @@ const Hero = () => {
     };
   }, []);
 
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      });
-
-      // Text moves up first and more noticeably
-      tl.to(
-        contentRef.current,
-        {
-          y: -200,
-          opacity: 0,
-          ease: 'power2.out',
-        },
-        0,
-      );
-
-      // Background parallax targets the global background
-      tl.to(
-        '#global-background',
-        {
-          yPercent: 15,
-          ease: 'none',
-        },
-        0.2,
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+  useParallax(containerRef, contentRef, { opacity: 0 });
 
   return (
     <div
