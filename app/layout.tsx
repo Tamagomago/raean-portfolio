@@ -20,8 +20,9 @@ const rainyhearts = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'Portfolio',
-  description: 'My personal portfolio built with Next.js',
+  title: 'Raean',
+  description:
+    "Hello, I'm Raean Chrissean R. Tamayo, a third-year Computer Science student. Born on March 18, 2005, in Iloilo City, Philippines, I am an aspiring full-stack developer passionate about creating beautiful, functional, and user-friendly web applications.",
 };
 
 export default function RootLayout({
