@@ -1,13 +1,40 @@
-import React from 'react';
+'use client';
+
+import React, { useLayoutEffect } from 'react';
 import Hero from '@/app/components/home/hero';
 import About from '@/app/components/home/about';
 import Tools from './components/home/tools';
 import PixelBlast from '@/app/components/ui/pixel-blast';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Works from './components/home/works';
+import Experience from '@/app/components/home/experience';
+import Contact from './components/home/contact';
+import Footer from './components/layout/footer';
 
 export default function Home() {
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      gsap.to('#global-background', {
+        scrollTrigger: {
+          trigger: 'main',
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: true,
+        },
+        y: '20%',
+        ease: 'none',
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <main className={'bg-dark relative min-h-screen w-full overflow-x-hidden text-white'}>
-      <div id="global-background" className="absolute inset-0 z-0 h-full w-full">
+    <main className={'bg-dark relative min-h-dvh w-full overflow-x-hidden text-white'}>
+      <div id="global-background" className="fixed top-[-50%] left-0 z-0 h-[200%] w-full">
         <PixelBlast
           variant="diamond"
           pixelSize={3}
@@ -34,6 +61,10 @@ export default function Home() {
         <Hero />
         <About />
         <Tools />
+        <Works />
+        <Experience />
+        <Contact />
+        <Footer />
       </div>
     </main>
   );

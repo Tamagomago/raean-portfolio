@@ -152,7 +152,7 @@ const Title = ({
               key={i}
               data-c={char}
               className={cn(
-                'relative inline-block text-[15vw] leading-none font-extralight',
+                'relative inline-block leading-none font-extralight',
                 'transition-[color,background,text-decoration] duration-150',
                 className,
                 font,

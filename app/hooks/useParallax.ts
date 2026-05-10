@@ -7,7 +7,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 interface ParallaxOptions {
   yOffset?: number;
   opacity?: number;
-  bgYPercent?: number;
   start?: string;
   end?: string;
   ease?: string;
@@ -21,7 +20,6 @@ export const useParallax = (
   const {
     yOffset = -200,
     opacity,
-    bgYPercent = 15,
     start = 'top top',
     end = 'bottom top',
     ease = 'power2.out',
@@ -50,18 +48,8 @@ export const useParallax = (
         },
         0,
       );
-
-      // Background parallax
-      tl.to(
-        '#global-background',
-        {
-          yPercent: bgYPercent,
-          ease: 'none',
-        },
-        0.2,
-      );
-    }, containerRef);
+    });
 
     return () => ctx.revert();
-  }, [containerRef, contentRef, yOffset, opacity, bgYPercent, start, end, ease]);
+  }, [containerRef, contentRef, yOffset, opacity, start, end, ease]);
 };

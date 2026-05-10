@@ -48,18 +48,22 @@ const Hero = () => {
     <div
       ref={containerRef}
       className={
-        'relative flex h-screen w-full max-w-full shrink-0 flex-col items-center justify-center overflow-hidden'
+        'relative flex h-dvh w-full max-w-full shrink-0 flex-col items-center justify-center overflow-hidden'
       }
     >
-      <div ref={contentRef} className="relative z-10">
+      <div ref={contentRef} className="relative z-10 flex flex-col items-center">
         <Title
           distortIntervalMs={2000}
           forceVisible={isVisible}
-          className={'sm:text-[12vw] md:text-[200px] md:font-black lg:text-[300px]'}
+          className={'text-[15vw] sm:text-[12vw] md:text-[200px] md:font-black lg:text-[300px]'}
         >
           RAEAN
         </Title>
-        <Text className={cn(rainyhearts.className, 'px-8')} forceVisible={isVisible}>
+        <Text
+          className={cn(rainyhearts.className, 'px-8 text-sm md:text-xl')}
+          forceVisible={isVisible}
+          align="center"
+        >
           {'//    FULLSTACK_DEVELOPER'}
         </Text>
       </div>

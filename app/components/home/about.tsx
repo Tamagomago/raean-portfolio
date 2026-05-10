@@ -1,64 +1,60 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { cn } from '@/app/lib/utils';
 import { GeistPixelSquare } from 'geist/font/pixel';
 import styles from '@/app/components/ui/typography.module.css';
-import { Title, Text, NavLink } from '@/app/components/ui';
-import Link from 'next/link';
+import { Title, Text, ViewMore } from '@/app/components/ui';
+import { useParallax } from '@/app/hooks/useParallax';
 
 const About = () => {
-  const [isViewMoreHovered, setIsViewMoreHovered] = useState(false);
-  const description =
-    'I am Raean Chrissean R. Tamayo, a third-year Computer Science student.\nBorn on March 18, 2005, in Iloilo City, Philippines,\nI am an aspiring full-stack developer passionate about creating beautiful, functional, and user-friendly web applications.';
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useParallax(containerRef, contentRef);
+
+  const description = `Hello, I'm Raean Chrissean R. Tamayo, a third-year Computer Science student.\nBorn on March 18, 2005, in Iloilo City, Philippines,\nI am an aspiring full-stack developer passionate about creating beautiful, functional, and user-friendly web applications.`;
   return (
-    <div className={cn('bg-dark relative w-full px-8 py-20', GeistPixelSquare.className)}>
-      <div className={'my-50 ml-16'}>
+    <div
+      ref={containerRef}
+      className={cn(
+        'bg-dark relative w-full overflow-hidden px-6 py-12 md:px-12 md:py-20 lg:px-24',
+        GeistPixelSquare.className,
+      )}
+    >
+      <div ref={contentRef} className={'my-10 pl-0 md:my-32 md:pl-10 lg:pl-20'}>
         <h1
-          className={cn(styles.s_outline, 'mt-50 text-7xl font-thin tracking-widest')}
+          className={cn(
+            styles.s_outline,
+            'mt-10 text-5xl font-thin tracking-widest sm:text-6xl md:mt-24 md:text-7xl lg:text-8xl',
+          )}
           style={{ WebkitTextStroke: '0.5px white' }}
         >
           ABOUT
         </h1>
-        <div className={'mb-8 ml-8'}>
-          <Title distortIntervalMs={2000} className={'text-[200px]'}>
+        <div className={'mb-4 pl-0 md:mb-8 md:pl-4 lg:pl-8'}>
+          <Title
+            distortIntervalMs={2000}
+            className={'text-[60px] leading-tight sm:text-[100px] md:text-[150px] lg:text-[200px]'}
+          >
             RAEAN
           </Title>
         </div>
-        <div className={'mb-30'}>
+        <div>
           {description.split('\n').map((sentence, i) => (
             <Text
               key={i}
               stagger={15}
               font={'font-geist-mono'}
               duration={300}
-              className={'text-sm'}
+              className={'text-xs md:text-sm'}
             >
               {sentence}
             </Text>
           ))}
         </div>
 
-        <div
-          className="mt-8 w-fit cursor-pointer"
-          onMouseEnter={() => setIsViewMoreHovered(true)}
-          onMouseLeave={() => setIsViewMoreHovered(false)}
-          onTouchStart={() => setIsViewMoreHovered(true)}
-        >
-          {isViewMoreHovered ? (
-            <NavLink href={'/about'} className="mt-0!">
-              view_more
-            </NavLink>
-          ) : (
-            <div className="px relative block w-fit overflow-hidden bg-white px-2 py-0.5 text-black transition-colors duration-150">
-              <Link href={'/about'}>
-                <Text duration={150} className="relative z-10 px-0! text-lg text-black!">
-                  {'>'}
-                </Text>
-              </Link>
-            </div>
-          )}
-        </div>
+        <ViewMore href={'/about'} />
       </div>
     </div>
   );

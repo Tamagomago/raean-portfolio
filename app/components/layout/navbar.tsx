@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { NavLink } from '@/app/components/ui';
 
 const Navbar = () => {
-  const navItems = ['home', 'about_raean', 'works', 'experience', 'contact'];
+  const navItems = ['home', 'about_raean', 'works', 'contact'];
   const [isHovered, setIsHovered] = useState(false);
   const pathname = usePathname();
   const currentPage = pathname === '/' ? 'home' : pathname.slice(1);
@@ -27,6 +27,7 @@ const Navbar = () => {
                 key={item}
                 href={item === 'home' ? '/' : item}
                 showActiveBg={showActiveBg}
+                textClassName={'text-base!'}
               >
                 {item}
               </NavLink>

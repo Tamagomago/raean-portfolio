@@ -17,7 +17,7 @@ const Tools = () => {
   return (
     <div
       ref={containerRef}
-      className={'relative flex min-h-screen w-full justify-center px-8'}
+      className={'relative flex min-h-dvh w-full justify-center overflow-hidden px-8'}
     >
       {/* Fade-to-background overlay */}
       <div className="to-dark pointer-events-none absolute top-0 left-0 z-20 h-48 w-full bg-linear-to-t from-transparent" />
@@ -27,7 +27,7 @@ const Tools = () => {
         className={'my-50 flex max-w-4xl flex-col items-center justify-center text-center'}
       >
         <div className="mb-8">
-          <Title distortIntervalMs={2000} className={'text-[150px] md:text-[200px]'}>
+          <Title distortIntervalMs={2000} className={'text-[80px] leading-tight md:text-[200px]'}>
             TOOLS
           </Title>
         </div>
@@ -38,7 +38,7 @@ const Tools = () => {
               stagger={15}
               font={'font-geist-mono'}
               duration={300}
-              className={'text-sm'}
+              className={'text-xs! md:text-sm!'}
               align="center"
             >
               {sentence}

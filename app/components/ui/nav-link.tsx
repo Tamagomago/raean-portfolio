@@ -10,10 +10,18 @@ interface NavLinkProps {
   children: string;
   showActiveBg?: boolean;
   className?: string;
+  textClassName?: string;
   onMouseEnter?: () => void;
 }
 
-const NavLink = ({ href, children, showActiveBg, className, onMouseEnter }: NavLinkProps) => {
+const NavLink = ({
+  href,
+  children,
+  showActiveBg,
+  className,
+  textClassName,
+  onMouseEnter,
+}: NavLinkProps) => {
   const [glitchKey, setGlitchKey] = useState(0);
 
   const handleMouseEnter = () => {
@@ -25,7 +33,8 @@ const NavLink = ({ href, children, showActiveBg, className, onMouseEnter }: NavL
     <Link
       href={href}
       className={cn(
-        'group relative block w-fit overflow-hidden py-0.5 pr-4 pl-8 transition-colors duration-150',
+        'group relative block w-fit overflow-hidden transition-colors duration-150',
+        textClassName?.includes('p-') ? '' : 'py-0.5 pr-4 pl-8',
         showActiveBg ? 'text-black' : 'text-white',
         className,
       )}
@@ -41,11 +50,13 @@ const NavLink = ({ href, children, showActiveBg, className, onMouseEnter }: NavL
       <Text
         key={glitchKey}
         className={cn(
-          'relative z-10 px-0! text-lg transition-colors duration-300',
+          'relative z-10 px-0! transition-colors duration-300',
           showActiveBg ? 'text-black' : 'group-hover:text-black',
           'font-rainyhearts',
+          textClassName,
         )}
         forceVisible={true}
+        noWrap={true}
       >
         {children.startsWith('>') ? children : `> ${children}`}
       </Text>
