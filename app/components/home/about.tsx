@@ -54,7 +54,7 @@ const About = () => {
           ))}
         </div>
 
-        <ViewMore href={'/about'} />
+        <ViewMore href={'/about_raean'} />
       </div>
     </div>
   );

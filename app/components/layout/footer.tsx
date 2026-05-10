@@ -7,7 +7,7 @@ import { NavLink, Title } from '@/app/components/ui';
 
 const Footer = () => {
   return (
-    <footer className="mt-20 w-full border-t border-dashed border-white/70">
+    <footer className="relative z-50 mt-20 w-full border-t border-dashed border-white/70 bg-transparent">
       <div className="grid grid-cols-[1fr_120px] md:grid-cols-[1fr_300px]">
         {/* Main Links Column */}
         <div className="flex flex-col border-l border-dashed border-white/70">
@@ -41,10 +41,10 @@ const Footer = () => {
         </div>
 
         {/* Socials Column */}
-        <div className="grid grid-rows-[1fr_2fr] border-l border-r border-dashed border-white/70">
+        <div className="grid grid-rows-[1fr_2fr] border-r border-l border-dashed border-white/70">
           <div className="grid grid-cols-2 border-b border-dashed border-white/70">
             <Link
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/raean-chrissean-tamayo-51722939a"
               target="_blank"
               className="group flex items-center justify-center border-r border-dashed border-white/70 transition-colors duration-300 hover:bg-white/5"
             >

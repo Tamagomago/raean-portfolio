@@ -21,7 +21,7 @@ const getLatestDateValue = (date: string): number => {
 export const getLatestExperience = (experiences: Experience[], limit = 3): Experience[] => {
   return [...experiences]
     .sort((a, b) => getLatestDateValue(b.date_duration) - getLatestDateValue(a.date_duration))
-    .slice(0, limit);
+    .slice(0, (limit === -1 ? experiences.length : limit) || 3);
 };
 
 export const truncate = (str: string, length: number) => {

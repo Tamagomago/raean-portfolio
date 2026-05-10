@@ -34,6 +34,7 @@ const Contact = () => {
               font={'font-geist-mono'}
               className={'text-xs md:text-left md:text-sm'}
               align={'center'}
+              stagger={10}
             >
               {sentence}
             </Text>
