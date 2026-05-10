@@ -34,7 +34,7 @@ const WorksList = () => {
           start: 'top top',
           end: () => `+=${getScrollAmount()}`,
           pin: true,
-          scrub: 1,
+          scrub: true,
           invalidateOnRefresh: true,
           anticipatePin: 1,
           pinSpacing: true,

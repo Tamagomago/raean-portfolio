@@ -32,10 +32,13 @@ const PageLayout = ({ children }: PageLayoutProps) => {
 
   return (
     <main className={'bg-dark relative min-h-dvh w-full overflow-x-hidden text-white'}>
-      <div id="global-background" className="fixed top-[-50%] left-0 z-0 h-[200%] w-full">
+      <div
+        id="global-background"
+        className="fixed top-[-50%] left-0 z-0 h-[200%] w-full will-change-transform"
+      >
         <PixelBlast
           variant="diamond"
-          pixelSize={3}
+          pixelSize={6} // Increased pixel size for better performance
           color="#575757"
           patternScale={2.5}
           patternDensity={1.3}
@@ -48,8 +51,8 @@ const PageLayout = ({ children }: PageLayoutProps) => {
           liquidStrength={0.12}
           liquidRadius={1.2}
           liquidWobbleSpeed={5}
-          speed={3}
-          autoPauseOffscreen={false}
+          speed={2} // Reduced speed slightly
+          autoPauseOffscreen={true} // Enable auto-pause
           edgeFade={0}
           transparent
           className={'h-full w-full'}

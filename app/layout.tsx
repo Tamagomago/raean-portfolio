@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import localFont from 'next/font/local';
 import '@/app/globals.css';
 import Navbar from './components/layout/navbar';
+import SmoothScroll from './components/layout/smooth-scroll';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,8 +36,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${rainyhearts.variable} antialiased`}
       >
-        <Navbar />
-        {children}
+        <SmoothScroll>
+          <Navbar />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
