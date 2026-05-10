@@ -18,7 +18,7 @@ const Experience = () => {
   return (
     <div
       ref={containerRef}
-      className={'bg-dark relative w-full overflow-hidden px-6 py-20 md:px-12 lg:px-24 md:py-50'}
+      className={'bg-dark relative w-full overflow-hidden px-6 py-20 md:px-12 md:py-50 lg:px-24'}
     >
       <div
         ref={contentRef}
@@ -36,7 +36,7 @@ const Experience = () => {
         <div className="flex w-full flex-col items-center justify-center lg:flex-1 lg:items-end">
           {latestThree.map((exp, i) => (
             <Link
-              href={'/about'}
+              href={'/about_raean'}
               key={i}
               className={cn(
                 i === 2 ? 'border-b' : '',
@@ -44,7 +44,7 @@ const Experience = () => {
               )}
             >
               <div
-                className={`grid flex-1 grid-cols-1 items-start gap-2 sm:grid-cols-[160px_1fr] md:grid-cols-[200px_1fr] sm:items-center sm:gap-0`}
+                className={`grid flex-1 grid-cols-1 items-start gap-2 sm:grid-cols-[160px_1fr] sm:items-center sm:gap-0 md:grid-cols-[200px_1fr]`}
               >
                 <Text className="text-sm transition-transform duration-300 group-hover:translate-x-2 md:text-xl">
                   {exp.date_duration}
